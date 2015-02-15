@@ -20,3 +20,19 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+# =============================================================================
+# Message handles for CLI mode
+# =============================================================================
+
+# COLORS
+HEADER = '\033[95m'
+OKBLUE = '\033[94m'
+OKGREEN = '\033[92m'
+WARNING = '\033[93m'
+FAIL = '\033[91m'
+ENDC = '\033[0m'
+
+
+def print_exception(exception):
+        print("{1}{0}{2}".format(exception, FAIL, ENDC))
+
