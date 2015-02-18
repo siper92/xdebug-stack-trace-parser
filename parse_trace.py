@@ -21,13 +21,35 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import getopt
+import sys
+# CUSTOM IMPORTS
 import parsetrace
-import argparse
+import parsetrace.cli.messages as messenger
 
-parser = argparse.ArgumentParser(description='Parse xdebug stack trace files.')
-parser.add_argument('--file', dest='file', action='store_const',
-                    const=sum, default=max,
-                    help='file to be parsed')
 
-args = parser.parse_args()
+def main():
+    global verbose
+    file = ''
 
+    try:
+        options, args = getopt.getopt(sys.argv[1:], "f:hv", ["file=", "help="])
+    except getopt.GetoptError as err:
+        # print help information and exit:
+        messenger.print_exception(err)
+        messenger.print_help()
+        sys.exit(2)
+
+    for option, value in options:
+        if option == "-v":
+            verbose = True
+        elif option in ("-h", "--help"):
+            messenger.print_help()
+            sys.exit()
+        elif option in ("-f", "--file"):
+            file = value
+
+    print(file)
+
+if __name__ == "__main__":
+    main()

@@ -36,3 +36,9 @@ ENDC = '\033[0m'
 def print_exception(exception):
         print("{1}{0}{2}".format(exception, FAIL, ENDC))
 
+
+def print_help():
+    print("USAGE:")
+    print("  options:")
+    print("    -f/--file {{file_path}} -> {0}required*{1}".format(WARNING, ENDC))
+
