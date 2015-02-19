@@ -24,9 +24,45 @@
 
 import os
 
-HOME_FOLDER = os.path.expanduser("~")
-DV_BASE_INDEXES_FOLDER = str(HOME_FOLDER) + os.sep + ".xdebug-parse-trace"
+HOME_FOLDER = ''
+DV_BASE_INDEXES_FOLDER = ''
+BASE_INDEXES_FOLDER = ''
 
-# folder in which the index files are saved
-# this folder is also used to store parsed file data
-BASE_INDEXES_FOLDER = DV_BASE_INDEXES_FOLDER
+
+def init():
+    """ init settings and more """
+    global HOME_FOLDER, DV_BASE_INDEXES_FOLDER, BASE_INDEXES_FOLDER
+
+    HOME_FOLDER = os.path.expanduser("~")
+    DV_BASE_INDEXES_FOLDER = str(HOME_FOLDER) + os.sep + ".xdebug-parse-trace"
+
+    # folder in which the index files are saved
+    # this folder is also used to store parsed file data
+    BASE_INDEXES_FOLDER = DV_BASE_INDEXES_FOLDER
+
+IS_CLI_MODE = True
+
+
+def set_application_mode(new_mode):
+    """ set the application mode if needed """
+    global IS_CLI_MODE
+    if new_mode == "gui":
+        IS_CLI_MODE = False
+    else:
+        IS_CLI_MODE = True
+
+
+def is_cli_mode():
+    return IS_CLI_MODE
+
+
+def is_gui_mode():
+    return not IS_CLI_MODE
+
+
+def get_home_folder():
+    return HOME_FOLDER
+
+
+def get_base_index_folder():
+    return BASE_INDEXES_FOLDER

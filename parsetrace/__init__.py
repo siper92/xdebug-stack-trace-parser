@@ -23,29 +23,11 @@
 import os
 from . import settings
 from . import messages
+settings.init()
 
-IS_CLI_MODE = True
-
-
-def set_application_mode(new_mode):
-    """ set the application mode if needed """
-    global IS_CLI_MODE
-    if new_mode == "gui":
-        IS_CLI_MODE = False
-    else:
-        IS_CLI_MODE = True
-
-
-def is_cli_mode():
-    return IS_CLI_MODE
-
-
-def is_gui_mode():
-    return not IS_CLI_MODE
-
-if not os.path.exists(settings.BASE_INDEXES_FOLDER):
+if not os.path.exists(settings.get_base_index_folder()):
     # create the main index folder
     try:
-        os.makedirs(settings.BASE_INDEXES_FOLDER)
+        os.makedirs(settings.get_base_index_folder())
     except OSError as exception:
         messages.print_exception(exception)
